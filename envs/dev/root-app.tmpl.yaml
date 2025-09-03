@@ -1,0 +1,20 @@
+apiVersion : argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: ${app_name}
+  namespace: ${namespace}
+  labels:
+    finops.io/env: dev
+spec:
+  project: default
+  source:
+    repoURL: ${repoURL}
+    targetRevision: ${revision}
+    path: ${path}
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: argocd
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
