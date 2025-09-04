@@ -24,7 +24,7 @@ module "eks" {
   source = "terraform-aws-modules/eks/aws"
   version = "~> 20.24"
   cluster_name = var.cluster_name
-  cluster_version = var.version
+  cluster_version = var.ver
   cluster_endpoint_public_access = true
   enable_irsa = true
 

@@ -3,7 +3,7 @@ variable "cluster_name" {
   type = string
 }
 
-variable "version" {
+variable "ver" {
   type = string
 }
 
