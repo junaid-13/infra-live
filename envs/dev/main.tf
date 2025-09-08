@@ -21,7 +21,7 @@ module "kms" {
 module "eks" {
   source = "../../modules/eks"
   cluster_name = "${var.name}-eks"
-  version = "1.29"
+  ver = "1.29"
   subnet_ids = module.network.private_subnets
   instance_types = ["t3.medium"]
   capacity_type = "SPOT"
