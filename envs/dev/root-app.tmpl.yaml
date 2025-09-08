@@ -8,7 +8,7 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: ${repoURL}
+    repoURL: ${repo_url}
     targetRevision: ${revision}
     path: ${path}
   destination:
