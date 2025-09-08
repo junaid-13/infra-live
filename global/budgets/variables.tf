@@ -1,4 +1,3 @@
-
 variable "emails" {
   description = "Email addresses to notify on budget alerts"
   type        = list(string)

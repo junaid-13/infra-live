@@ -9,19 +9,20 @@ terraform {
 
 provider "aws" {}
 
+
 locals {
   common = {
-  time_unit         = "MONTHLY"
-  budget_type       = "COST"
-  time_period_start = "2025-09-02_00:00"
-}
+    time_unit         = "MONTHLY"
+    budget_type       = "COST"
+    time_period_start = "2025-09-08_00:00"
+  }
 }
 # DEV
 
 resource "aws_budgets_budget" "dev" {
   name              = "fintech-dev-monthly"
   budget_type       = local.common.budget_type
-  limit_amount      = local.amounts.dev
+  limit_amount      = var.amounts.dev
   limit_unit        = "USD"
   time_unit         = local.common.time_unit
   time_period_start = local.common.time_period_start
@@ -47,7 +48,7 @@ resource "aws_budgets_budget" "dev" {
 resource "aws_budgets_budget" "stage" {
   name              = "fintech-stage-monthly"
   budget_type       = local.common.budget_type
-  limit_amount      = local.amounts.stage
+  limit_amount      = var.amounts.stage
   limit_unit        = "USD"
   time_unit         = local.common.time_unit
   time_period_start = local.common.time_period_start
@@ -74,7 +75,7 @@ resource "aws_budgets_budget" "stage" {
 resource "aws_budgets_budget" "prod" {
   name              = "fintech-prod-monthly"
   budget_type       = local.common.budget_type
-  limit_amount      = local.amounts.prod
+  limit_amount      = var.amounts.prod
   limit_unit        = "USD"
   time_unit         = local.common.time_unit
   time_period_start = local.common.time_period_start
