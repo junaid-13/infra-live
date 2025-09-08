@@ -1,14 +1,14 @@
 
 variable "emails" {
   description = "Email addresses to notify on budget alerts"
-  type = list(string)
+  type        = list(string)
 }
 
 variable "amounts" {
   description = "Monthly budget caps per env"
   type = object({
-    dev = number
+    dev   = number
     stage = number
-    prod = number
+    prod  = number
   })
 }
