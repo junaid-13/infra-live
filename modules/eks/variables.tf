@@ -7,9 +7,6 @@ variable "vpc_id" {
   type = string
 }
 
-variable "ver" {
-  type = string
-}
 
 variable "ver" {
   type = string
