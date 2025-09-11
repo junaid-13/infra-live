@@ -22,6 +22,7 @@ module "eks" {
   source         = "../../modules/eks"
   cluster_name   = "${var.name}-eks"
   ver            = "1.29"
+  vpc_id         = module.network.vpc_id
   subnet_ids     = module.network.private_subnets
   instance_types = ["t3.medium"]
   capacity_type  = "SPOT"
