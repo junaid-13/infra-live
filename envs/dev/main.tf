@@ -10,9 +10,13 @@ module "vpc" {
   name = "${var.name}-vpc"
   cidr = "10.20.0.0/16"
 
-  azs             = local.azs
+  azs             = ["us-east-1a","us-east-1b","us-east-1c"]
+
+  # Private: 3x /20 at indexes 0..2
   private_subnets = [for i in range(3) : cidrsubnet("10.20.0.0/16", 4, i)]
-  public_subnets  = [for i in range(3) : cidrsubnet("10.20.0.0/16", 8, i + 32)]
+
+  # Public: 3x /24, moved well outside the /20 ranges → 64..66
+  public_subnets  = [for i in range(3) : cidrsubnet("10.20.0.0/16", 8, 64 + i)]
 
   enable_nat_gateway     = true
   single_nat_gateway     = true
