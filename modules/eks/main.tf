@@ -1,34 +1,24 @@
 terraform {
   required_providers {
-    aws = {
-      source  = "hashicorp/aws"
-      version = "~> 5.55"
-    }
-    kubernetes = {
-      source  = "hashicorp/kubernetes"
-      version = "~> 2.32"
-    }
-    helm = {
-      source  = "hashicorp/helm"
-      version = "~> 2.14"
-    }
+    aws        = { source = "hashicorp/aws",        version = "~> 5.55" }
+    kubernetes = { source = "hashicorp/kubernetes", version = "~> 2.32" }
+    helm       = { source = "hashicorp/helm",       version = "~> 2.14" }
   }
 }
 
-
-provider "aws" {}
-
-# kubernetes/helm providers will be configured by caller using cluster outputs.
+# Providers for kubernetes/helm are configured by the caller (env stack).
 
 module "eks" {
-  source                         = "terraform-aws-modules/eks/aws"
-  version                        = "~> 20.24"
+  source  = "terraform-aws-modules/eks/aws"
+  version = "~> 20.24"
+
   cluster_name                   = var.cluster_name
-  cluster_version                = var.ver
+  cluster_version                = var.ver            # keep your 'ver' var
   cluster_endpoint_public_access = true
   enable_irsa                    = true
 
-  vpc_id     = data.aws_vpc.id
+  # ✅ Explicit inputs (no guessing via tags/data sources)
+  vpc_id     = var.vpc_id
   subnet_ids = var.subnet_ids
 
   eks_managed_node_groups = {
@@ -46,6 +36,6 @@ module "eks" {
       tags = var.tags
     }
   }
+
   tags = var.tags
 }
-
